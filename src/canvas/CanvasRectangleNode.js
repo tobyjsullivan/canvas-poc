@@ -2,15 +2,28 @@ import RectangleRenderNode from "../render/RectangleRenderNode.js";
 import CanvasNode from "./CanvasNode.js";
 import relativeLength from "./utils/relativeLength.js";
 
+function cssColor2Hex(cssValue) {
+  const parsed = parseCSSColor(cssValue);
+  if (parsed === null) {
+    return undefined;
+  }
+  const [r, g, b, a] = parsed;
+  const result = `#${r.toString(16)}${g.toString(16)}${b.toString(
+    16
+  )}${Math.round(a * 0xff).toString(16)}`;
+
+  return result;
+}
+
 /**
  * Rectangle Properties (so far):
  * - x
  * - y
  * - width
  * - height
+ * - background color
  *
  * TODO:
- * - fill color
  * - border color
  * - padding
  */
@@ -27,8 +40,9 @@ class CanvasRectangleNode extends CanvasNode {
     const {
       x: xLen,
       y: yLen,
-      width: widthLen,
-      height: heightLen,
+      width: widthLen = undefined,
+      height: heightLen = undefined,
+      backgroundColor,
       children,
     } = this.props;
     const { parent } = context;
@@ -56,6 +70,7 @@ class CanvasRectangleNode extends CanvasNode {
       y,
       width,
       height,
+      fill: cssColor2Hex(backgroundColor),
       children: childRenderNodes,
     });
 

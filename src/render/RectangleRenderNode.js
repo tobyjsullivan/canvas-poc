@@ -6,10 +6,10 @@ class RectangleRenderNode extends RenderNode {
   }
 
   render() {
-    const { x, y, width, height, children } = this.props;
+    const { x, y, width, height, fill, children } = this.props;
 
     // TODO: Support coloring from styles
-    const fillColor = PIXI.utils.string2hex("#FFFFFF");
+    const fillColor = PIXI.utils.string2hex(fill);
     const strokeColor = PIXI.utils.string2hex("#000000");
     const strokeWidth = 1;
 
@@ -19,14 +19,7 @@ class RectangleRenderNode extends RenderNode {
     // TODO: Must destroy graphics object when frame is cleared.
     const graphics = new PIXI.Graphics();
 
-    console.info(`[render()] `, { x, y, width, height });
     graphics.lineStyle(strokeWidth, strokeColor);
-
-    // Debug box
-    // TODO: Remove
-    // graphics.beginFill(PIXI.utils.string2hex("#d7d7d7"));
-    // graphics.drawRect(0, 0, 300, 300);
-    // graphics.endFill();
 
     graphics.beginFill(fillColor);
     graphics.drawRect(x, y, width, height);
@@ -62,23 +55,6 @@ class RectangleRenderNode extends RenderNode {
     //     Math.min(sprite.width, sprite.height) / 2
     //   )
     //   .endFill();
-
-    console.info(
-      `[render()] \ngraphics:`,
-      {
-        x: graphics.position.x,
-        y: graphics.position.y,
-        width: graphics.width,
-        height: graphics.height,
-      },
-      `\ncontainer:`,
-      {
-        x: container.position.x,
-        y: container.position.y,
-        width: container.width,
-        height: container.height,
-      }
-    );
 
     return {
       graphic: container,
