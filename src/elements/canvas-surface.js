@@ -7,12 +7,39 @@ import CanvasMLElement from "./CanvasMLElement.js";
 
 const REGEX_WHITESPACE = /[\s]+/g;
 
+const TEXT_PROP_MAP = {
+  ["color"]: "color",
+  ["font-size"]: "fontSize",
+  ["font-family"]: "fontFamily",
+};
+
 function isTextNode(domNode) {
   return domNode && domNode.nodeType === Node.TEXT_NODE;
 }
 
 function normalizeWhitespace(text) {
   return text.replace(REGEX_WHITESPACE, " ").trim();
+}
+
+function toCanvasText(domText) {
+  const content = normalizeWhitespace(domText.data);
+  const computedStyles = window.getComputedStyle(domText.parentElement);
+
+  const styles = {};
+  for (const styleProperty of Object.keys(TEXT_PROP_MAP)) {
+    const propName = TEXT_PROP_MAP[styleProperty];
+    const value = computedStyles.getPropertyValue(styleProperty);
+    if (value !== undefined) {
+      styles[propName] = value;
+    }
+  }
+
+  return new CanvasTextNode({
+    x: 0,
+    y: 0,
+    ...styles,
+    content,
+  });
 }
 
 /**
@@ -27,11 +54,7 @@ function toCanvasNode(domNode) {
 
   let result;
   if (isTextNode(domNode)) {
-    result = new CanvasTextNode({
-      x: 0,
-      y: 0,
-      content: normalizeWhitespace(domNode.data),
-    });
+    result = toCanvasText(domNode);
   } else if (domNode.toCanvasNode) {
     // This is a CanvasNode
     result = domNode.toCanvasNode({ children });

@@ -1,5 +1,7 @@
 import TextRenderNode, { wordWrapLines } from "../render/TextRenderNode.js";
 import CanvasNode from "./CanvasNode.js";
+import cssColor2Hex from "./utils/cssColor2Hex.js";
+import relativeLength from "./utils/relativeLength.js";
 
 class CanvasTextNode extends CanvasNode {
   constructor(props) {
@@ -7,11 +9,31 @@ class CanvasTextNode extends CanvasNode {
   }
 
   toRenderNodes(context) {
-    const { x, y, content } = this.props;
+    const {
+      x,
+      y,
+      color,
+      fontFamily: fontFamilyRaw,
+      fontSize: fontSizeLen,
+      content,
+    } = this.props;
     const { parent } = context;
-    const { width: parentWidth } = parent;
+    const { width: parentWidth, height: parentHeight } = parent;
 
-    const renderProps = { x, y };
+    console.log(`[CanvasTextNode] fontFamilyRaw:`, fontFamilyRaw);
+    const fontFamily = fontFamilyRaw
+      .split(",")
+      .map((family) => family.trim())
+      .map((family) => family.replace(/^["']|["']$/g, ""));
+    console.log(`[CanvasTextNode] fontFamily:`, fontFamily);
+    const fontSize = relativeLength(parentHeight, fontSizeLen);
+    const renderProps = {
+      x,
+      y,
+      fill: cssColor2Hex(color),
+      fontSize,
+      fontFamily,
+    };
 
     if (parentWidth === undefined) {
       // Put everything in

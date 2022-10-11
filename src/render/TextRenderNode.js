@@ -1,15 +1,17 @@
 import RenderNode from "./RenderNode.js";
 
 function getTextStyle(props) {
-  // TODO: Support font styling props
-  const fontFamily = "Ariel";
-  const fontSize = 24;
-  const fillColor = PIXI.utils.string2hex("#666666");
+  const {
+    fill = PIXI.utils.string2hex("#000000"),
+    fontSize = "12px",
+    fontFamily = "Ariel",
+  } = props;
+
   const textAlign = "left";
   return {
-    fontFamily: fontFamily,
-    fontSize: fontSize,
-    fill: fillColor,
+    fontFamily,
+    fontSize,
+    fill,
     align: textAlign,
   };
 }
