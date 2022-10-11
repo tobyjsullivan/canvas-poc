@@ -19,7 +19,8 @@ const initObserver = (root) => {
     return;
   }
 
-  const observer = new MutationObserver(getGroupNotifier(root));
+  const observerCallback = getGroupNotifier(root);
+  const observer = new MutationObserver(observerCallback);
   observer.observe(root, {
     subtree: true,
     childList: true,
@@ -39,6 +40,7 @@ const getListenerGroup = (root) => {
 };
 
 const getGroupNotifier = (root) => () => {
+  console.log(`[getGroupNotifier] Change observed`);
   const group = getListenerGroup(root);
   for (const callback of group) {
     callback();

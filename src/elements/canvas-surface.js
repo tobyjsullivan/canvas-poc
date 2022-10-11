@@ -112,6 +112,7 @@ class CanvasSurface extends CanvasMLElement {
   connectedCallback() {
     // Render canvas on every dom change.
     observe(this.getRootNode(), () => this._render());
+    window.addEventListener("load", () => this._render());
 
     this.pixiApp.resize();
 

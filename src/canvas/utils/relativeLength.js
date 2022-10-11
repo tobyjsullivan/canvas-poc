@@ -7,7 +7,7 @@ const relativeLength = (relative, measure) => {
     measure = measure.trim();
   }
 
-  if ([undefined, null, ""].includes(measure)) {
+  if ([undefined, null, "", "auto"].includes(measure)) {
     return undefined;
   }
 

@@ -3,6 +3,8 @@
   <head>
     <title>Canvas ML Proof of Concept</title>
     <style>
+      @import url("https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap");
+
       * {
         margin: 0;
         padding: 0;
@@ -50,39 +52,12 @@
         background-color: coral;
       }
     </style>
-
-    <!-- BEGIN Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap"
-      rel="stylesheet"
-    />
-    <!-- END Google Font -->
   </head>
   <body>
-    <canvas-surface>
-      <canvas-rect class="outer">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-        <canvas-rect class="inner">This is a node with the text.</canvas-rect>
-        <canvas-rect class="inner2">
-          This node also has text. Pretty cool
-        </canvas-rect>
-      </canvas-rect>
-      <canvas-rect class="outer2">
-        <canvas-rect class="inner"></canvas-rect>
-        <canvas-rect class="inner2"></canvas-rect>
-      </canvas-rect>
-    </canvas-surface>
+    <div id="root"></div>
     <script src="./third-party/pixijs/pixi.min.js"></script>
-    <!-- <script src="./third-party/react/react.dev.js"></script> -->
-    <!-- <script src="./third-party/react/react-dom.dev.js"></script> -->
+    <script src="./third-party/react/react.dev.js"></script>
+    <script src="./third-party/react/react-dom.dev.js"></script>
     <script src="./third-party/css-color-parser/csscolorparser.js"></script>
     <script src="./main.js" type="module"></script>
   </body>
