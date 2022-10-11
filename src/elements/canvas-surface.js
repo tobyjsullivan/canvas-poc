@@ -42,6 +42,19 @@ function toCanvasText(domText) {
   });
 }
 
+async function cleanupGraphics(graphics) {
+  if (!graphics.children) {
+    graphics.destroy();
+    return;
+  }
+
+  for (const child of graphics.children) {
+    cleanupGraphics(child);
+  }
+
+  graphics.destroy();
+}
+
 /**
  * This helper is used to avoid non-canvas elements breaking trees.
  * Any elements which are not canvas elements will be replaced with CanvasFragment nodes in the resulting tree.
@@ -150,6 +163,10 @@ class CanvasSurface extends CanvasMLElement {
     // TODO: Compute offset relative to viewport focus
     const { graphic: graphicTree, boundingBox } = renderTree.render();
     this.pixiApp.stage.addChild(graphicTree);
+    if (this.lastGraphicTree) {
+      cleanupGraphics(this.lastGraphicTree);
+    }
+    this.lastGraphicTree = graphicTree;
     console.timeEnd("render");
 
     console.timeEnd("canvas-update");

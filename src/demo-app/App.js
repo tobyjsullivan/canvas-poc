@@ -16,10 +16,25 @@ function Surface({ children }) {
   return React.createElement("canvas-surface", null, children);
 }
 
+function BlinkingRectangle({ children }) {
+  const [tick, setTick] = React.useState(false);
+
+  React.useEffect(() => {
+    setTimeout(() => setTick(!tick), 1000);
+  }, [tick]);
+
+  let className = "inner";
+  if (tick) {
+    className = "inner2";
+  }
+
+  return React.createElement(Rectangle, { className }, children);
+}
+
 export default function App() {
   const inner1A = React.createElement(
-    Rectangle,
-    { key: "inner1A", className: "inner" },
+    BlinkingRectangle,
+    { key: "inner1A" },
     "This is a node with the text."
   );
   const inner1B = React.createElement(
