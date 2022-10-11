@@ -19,12 +19,19 @@
         width: 640px;
         height: 480px;
       }
+
+      .inner {
+        --canvas-x: 10px;
+        --canvas-y: 5px;
+        width: 80%;
+        height: 80%;
+      }
     </style>
   </head>
   <body>
     <canvas-surface>
       <canvas-rect class="outer">
-        <!-- TODO: Inner rectangle-->
+        <canvas-rect class="inner"></canvas-rect>
       </canvas-rect>
     </canvas-surface>
     <script src="./third-party/pixijs/pixi.min.js"></script>

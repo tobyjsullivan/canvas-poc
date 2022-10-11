@@ -28,7 +28,7 @@ class RectangleRenderNode extends RenderNode {
     let offsetX = x;
     let offsetY = y;
     for (const child of children) {
-      const childGraphic = child.render(app);
+      const childGraphic = child.render();
       childGraphic.position.x = offsetX;
       childGraphic.position.y = offsetY;
 
