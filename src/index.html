@@ -33,17 +33,24 @@
         width: 80%;
         height: 80%;
       }
+
+      .inner2 {
+        --canvas-x: 50px;
+        --canvas-y: -25px;
+        width: 80%;
+        height: 80%;
+      }
     </style>
   </head>
   <body>
     <canvas-surface>
       <canvas-rect class="outer">
         <canvas-rect class="inner"></canvas-rect>
-        <canvas-rect class="inner"></canvas-rect>
+        <canvas-rect class="inner2"></canvas-rect>
       </canvas-rect>
       <canvas-rect class="outer2">
         <canvas-rect class="inner"></canvas-rect>
-        <canvas-rect class="inner"></canvas-rect>
+        <canvas-rect class="inner2"></canvas-rect>
       </canvas-rect>
     </canvas-surface>
     <script src="./third-party/pixijs/pixi.min.js"></script>

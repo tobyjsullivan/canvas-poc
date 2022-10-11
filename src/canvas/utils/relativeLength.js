@@ -1,6 +1,6 @@
-const REGEX_LENGTH_ZERO = /^0$/;
-const REGEX_LENGTH_PIXELS = /^(\d)+px$/;
-const REGEX_LENGTH_PERCENT = /^(\d)+\%$/;
+const REGEX_LENGTH_ZERO = /^-?0$/;
+const REGEX_LENGTH_PIXELS = /^(-?\d)+px$/;
+const REGEX_LENGTH_PERCENT = /^(-?\d)+\%$/;
 
 const relativeLength = (relative, measure) => {
   if (typeof measure === "string") {
