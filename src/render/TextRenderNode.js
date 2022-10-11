@@ -10,7 +10,7 @@ class TextRenderNode extends RenderNode {
     // TODO: Support font styling props
     const fontFamily = "Ariel";
     const fontSize = 24;
-    const fillColor = PIXI.utils.string2hex("#000000");
+    const fillColor = PIXI.utils.string2hex("#666666");
     const textAlign = "left";
 
     // const graphic = new PIXI.Graphic();
