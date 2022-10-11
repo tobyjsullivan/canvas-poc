@@ -8,17 +8,28 @@
         padding: 0;
       }
 
-      canvas-viewport {
+      canvas-surface {
         width: 100vw;
         height: 100vh;
+      }
+
+      .outer {
+        --canvas-x: 100px;
+        --canvas-y: 50px;
+        width: 640px;
+        height: 480px;
       }
     </style>
   </head>
   <body>
-    <canvas-viewport></canvas-viewport>
+    <canvas-surface>
+      <canvas-rect class="outer">
+        <!-- TODO: Inner rectangle-->
+      </canvas-rect>
+    </canvas-surface>
     <script src="./third-party/pixijs/pixi.min.js"></script>
-    <script src="./third-party/react/react.dev.js"></script>
-    <script src="./third-party/react/react-dom.dev.js"></script>
+    <!-- <script src="./third-party/react/react.dev.js"></script>
+    <script src="./third-party/react/react-dom.dev.js"></script> -->
     <script src="./main.js" type="module"></script>
   </body>
 </html>

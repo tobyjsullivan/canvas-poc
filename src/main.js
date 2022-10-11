@@ -1,7 +1,7 @@
-import CanvasViewport from "./components/canvas-viewport.js";
+import { defineElements } from "./elements/index.js";
 
 function main() {
-  window.customElements.define("canvas-viewport", CanvasViewport);
+  defineElements();
 
   console.log("Hello, world!");
   PIXI.utils.sayHello("WebGL");
