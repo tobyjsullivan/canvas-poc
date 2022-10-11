@@ -1,23 +1,40 @@
 import CanvasFragmentNode from "../canvas/CanvasFragmentNode.js";
 import CanvasSurfaceNode from "../canvas/CanvasSurfaceNode.js";
+import CanvasTextNode from "../canvas/CanvasTextNode.js";
 import FragmentRenderNode from "../render/FragmentRenderNode.js";
 import { observe } from "../watch.js";
 import CanvasMLElement from "./CanvasMLElement.js";
+
+const REGEX_WHITESPACE = /[\s]+/g;
+
+function isTextNode(domNode) {
+  return domNode && domNode.nodeType === Node.TEXT_NODE;
+}
+
+function normalizeWhitespace(text) {
+  return text.replace(REGEX_WHITESPACE, " ").trim();
+}
 
 /**
  * This helper is used to avoid non-canvas elements breaking trees.
  * Any elements which are not canvas elements will be replaced with CanvasFragment nodes in the resulting tree.
  */
-function toCanvasNode(element) {
+function toCanvasNode(domNode) {
   const children = [];
-  for (const childElement of element.childNodes) {
+  for (const childElement of domNode.childNodes) {
     children.push(toCanvasNode(childElement));
   }
 
   let result;
-  if (element.toCanvasNode) {
+  if (isTextNode(domNode)) {
+    result = new CanvasTextNode({
+      x: 0,
+      y: 0,
+      content: normalizeWhitespace(domNode.data),
+    });
+  } else if (domNode.toCanvasNode) {
     // This is a CanvasNode
-    result = element.toCanvasNode({ children });
+    result = domNode.toCanvasNode({ children });
   } else {
     // Convert to fragment
     result = new CanvasFragmentNode({ children });
@@ -63,7 +80,7 @@ class CanvasSurface extends CanvasMLElement {
     const pixiOpts = {
       view: $canvas,
       resizeTo: this,
-      antialias: true,
+      antialias: false,
       autoDensity: true,
     };
     this.pixiApp = new PIXI.Application(pixiOpts);
