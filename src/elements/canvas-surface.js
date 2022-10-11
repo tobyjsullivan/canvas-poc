@@ -107,7 +107,7 @@ class CanvasSurface extends CanvasMLElement {
 
     console.time("render");
     // TODO: Compute offset relative to viewport focus
-    const graphicTree = renderTree.render();
+    const { graphic: graphicTree, boundingBox } = renderTree.render();
     this.pixiApp.stage.addChild(graphicTree);
     console.timeEnd("render");
 

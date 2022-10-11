@@ -13,11 +13,36 @@ class FragmentRenderNode extends RenderNode {
 
     const container = new PIXI.Container();
 
+    let left, right, top, bottom;
     for (const child of children) {
-      container.addChild(child.render());
+      const { graphic: childGraphic, boundingBox } = child.render();
+      container.addChild(childGraphic);
+
+      if (boundingBox.x < left) {
+        left = boundingBox.x;
+      }
+
+      if (boundingBox.x + boundingBox.width > right) {
+        right = boundingBox.x + boundingBox.width;
+      }
+
+      if (boundingBox.y < top) {
+        top = boundingBox.y;
+      }
+
+      if (boundingBox.y + boundingBox.height > bottom) {
+        bottom = boundingBox.y + boundingBox.height;
+      }
     }
 
-    return container;
+    const boundingBox = {
+      x: left,
+      y: top,
+      width: right - left,
+      height: bottom - top,
+    };
+
+    return { graphic: container, boundingBox };
   }
 }
 

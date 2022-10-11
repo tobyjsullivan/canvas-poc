@@ -20,9 +20,16 @@
         height: 480px;
       }
 
+      .outer2 {
+        --canvas-x: 100px;
+        --canvas-y: 550px;
+        width: 640px;
+        height: 480px;
+      }
+
       .inner {
         --canvas-x: 10px;
-        --canvas-y: 5px;
+        --canvas-y: 25px;
         width: 80%;
         height: 80%;
       }
@@ -31,6 +38,11 @@
   <body>
     <canvas-surface>
       <canvas-rect class="outer">
+        <canvas-rect class="inner"></canvas-rect>
+        <canvas-rect class="inner"></canvas-rect>
+      </canvas-rect>
+      <canvas-rect class="outer2">
+        <canvas-rect class="inner"></canvas-rect>
         <canvas-rect class="inner"></canvas-rect>
       </canvas-rect>
     </canvas-surface>
